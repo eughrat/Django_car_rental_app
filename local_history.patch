@@ -1,0 +1,19 @@
+Index: carrental/cars/views.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/carrental/cars/views.py b/carrental/cars/views.py
+--- a/carrental/cars/views.py	
++++ b/carrental/cars/views.py	(date 1645992670244)
+@@ -80,9 +80,3 @@
+         car = Car.objects.get(id=pk)
+         context['car'] = car
+         return render(request, template, context)
+-
+-
+-class CarReservation(ProductReservationView):
+-        base_model = Car     # required
+-        amount_field = 'days' # required
+-        extra_display_field = ['day'] # not required
+\ No newline at end of file
