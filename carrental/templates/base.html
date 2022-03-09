@@ -5,6 +5,8 @@
 
     <meta charset="UTF-8">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Piernicki Car Rental</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -24,7 +26,7 @@
         <a class="navbar-brand mynav" href="{% url 'home' %}">Piernicki Rent</a>
         <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
-                <li><a href="{% url 'cars:list' %}">Moje zamówienia</a></li>
+                <li><a href="{% url 'cars:booking_list' %}">Moje zamówienia</a></li>
                 <li><a href="{% url 'cars:list' %}">Oferta</a></li>
                 <li><a href="{% url 'about' %}">O nas</a></li>
                 <li><a href="{% url 'cars:list' %}">Zarezerwuj</a></li>

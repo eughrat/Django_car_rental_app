@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 
 
-from django.urls import path, include
-from .views import (car_list_view, car_view, BookingView, BookingListView)
+from django.urls import path
+from .views import (car_list_view, car_view, BookingView, BookingListView, add_comment_to_car)
 
 app_name = 'cars'
 
@@ -26,6 +26,7 @@ urlpatterns = [
     path('booking/<int:pk>', BookingView.as_view(), name = "booking"),
     path('booking_list', BookingListView.as_view(), name = "booking_list"),
     path('car_list', car_list_view, name = "list"),
+    path('<int:pk>/d+/comment/', add_comment_to_car, name='add_comment_to_car'),
 ]
 
 

@@ -1,11 +1,10 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from django.views.generic import ListView, FormView
-# Create your views here.
-from .models import Car, CarDetail, CarMain, Booking
-from .forms import AvailabilityForm, CarForm, CarDetailForm, CarMainForm
+from .models import Car, Booking
+from .forms import AvailabilityForm, CarForm, CarDetailForm, CarMainForm, CommentForm
 from .booking_functions.availability import check_availability
-from django.views.generic import TemplateView
 
+from django.contrib.auth.decorators import login_required
 
 def car_list_view(request):
     context = {}
@@ -79,6 +78,8 @@ def car_view(request, pk):
         context['car'] = car
         return render(request, template, context)
 
+
+
 class BookingListView(ListView):
     model = Booking
     template_name = "booking_list.html"
@@ -92,12 +93,11 @@ class BookingListView(ListView):
 
 class BookingView(FormView):
     form_class = AvailabilityForm
-    template_name = 'availability_form.html'
+    template_name = 'car_booking.html'
 
     def form_valid(self, form):
         data = form.cleaned_data
         car_list = Car.objects.select_related("main").select_related("detail").all()
-        available_cars = []
         for car in car_list:
             if check_availability(car, data['check_in'],data['check_out']):
 
@@ -112,3 +112,17 @@ class BookingView(FormView):
                 return HttpResponse(booking)
             else:
                 return HttpResponse('This car is already booked.')
+
+@login_required
+def add_comment_to_car(request, pk):
+    car = get_object_or_404(Car,pk=pk)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.car = car
+            comment.save()
+            return redirect('cars:detail',pk=car.pk)
+    else:
+        form = CommentForm()
+    return render(request,'cars/comment_form.html',{'form':form})

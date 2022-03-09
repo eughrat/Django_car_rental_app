@@ -1,4 +1,4 @@
-from .models import Car, CarDetail, CarMain
+from .models import Car, CarDetail, CarMain, Comment
 from django.forms import ModelForm, DateInput
 from django import forms
 from django.core.validators import MinValueValidator
@@ -59,3 +59,14 @@ class CarMainForm(ModelForm):
 class AvailabilityForm(forms.Form):
     check_in = forms.DateTimeField(required=True, input_formats=["%Y-%m-%dT%H:%M", ])
     check_out = forms.DateTimeField(required=True, input_formats=["%Y-%m-%dT%H:%M", ])
+
+class CommentForm(forms.ModelForm):
+
+    class Meta():
+        model = Comment
+        fields = ('author', 'text')
+
+        widgets = {
+            'author':forms.TextInput(attrs={'class':'textinputclass'}),
+            'text':forms.Textarea(attrs={'class':'editable medium-editor-textarea'}),
+        }

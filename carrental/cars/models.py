@@ -1,9 +1,10 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.conf import settings
+from django.utils import timezone
+from django.urls import reverse
 from django.contrib.auth import get_user_model
 User = get_user_model()
-# Create your models here.
+
 
 class CarMain(models.Model):
     marka = models.CharField(max_length=16)
@@ -50,3 +51,19 @@ class Booking(models.Model):
 
     def __str__(self):
         return f"{self.user} has booked {self.car} from {self.check_in} to {self.check_out}"
+
+    def approve_comments(self):
+        return self.comments.filter(approved_comment=True)
+
+
+class Comment(models.Model):
+    car = models.ForeignKey('cars.Car', related_name='comment', on_delete=models.CASCADE)
+    author = models.CharField(max_length=200)
+    text = models.TextField()
+    create_date = models.DateTimeField(default=timezone.now())
+
+    def get_absolute_url(self):
+        return reverse('cars:list')
+
+    def __str__(self):
+        return self.text
