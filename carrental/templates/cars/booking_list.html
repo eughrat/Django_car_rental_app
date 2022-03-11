@@ -7,9 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-    {%for booking in booking_list%}
-    <h2>{{booking}}</h2>
-    {% endfor %}
+<div class="content">
+    <div class="header">
+        <div class="headings">
+            <h1>Twoje zamówienia</h1>
+            <h2>Witaj {{user}}</h2>
+        </div>
+    </div>
 
+    <div class="bookings">
+            {% for booking in booking_list %}
+                {%if booking.user == user%}
+                    <div class="booking">
+                        <div class="category">
+                            <h2>Użytkownik: {{booking.user}}</h2>
+                        </div>
+                        <div class="from">
+                            <h3>Od: {{booking.check_in}}</h3>
+                        </div>
+                        <div class="to">
+                            <h3>Do: {{booking.check_out}}</h3>
+                        </div>
+                        <div class="beds">
+                            <h3>Model: {{booking.car}}</h3>
+                        </div>
+                    </div>
+                {%endif%}
+            {% endfor %}
+    </div>
+</div>
 
 {% endblock %}

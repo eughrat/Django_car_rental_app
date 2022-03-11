@@ -37,12 +37,13 @@
     </tr>
 
 </table>
+{% if user.is_authenticated %}
+    <div class="input-div">
+        <a href="{% url 'cars:booking' car.id %}"><button> Book the Car</button></a>
+    </div>
 
-<div class="input-div">
-    <a href="{% url 'cars:booking' car.id %}"><button> Book the Car</button></a>
-</div>
-
-<a class="btn btn-primary btn-comment" href="{% url 'cars:add_comment_to_car' pk=car.pk %}">Add Comment</a>
+    <a class="btn btn-primary btn-comment" href="{% url 'cars:add_comment_to_car' pk=car.pk %}">Add Comment</a>
+{% endif %}
 
 <div class="container">
     {% for comment in car.comment.all %}

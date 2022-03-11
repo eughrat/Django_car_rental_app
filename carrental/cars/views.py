@@ -79,17 +79,20 @@ def car_view(request, pk):
         return render(request, template, context)
 
 
+class AllCarsListView(ListView):
+    model = Car
+    template_name = "all_cars_list.html"
+    def get_query_set(self,*args,**kwargs):
+        car_list = Booking.objects.all()
+        return car_list
+
 
 class BookingListView(ListView):
     model = Booking
     template_name = "booking_list.html"
     def get_query_set(self,*args,**kwargs):
-        if self.request.user.is_staff:
-            booking_list = Booking.object.all()
-            return booking_list
-        else:
-            booking_list = Booking.objects.filter(user=self.request.user)
-            return booking_list
+        booking_list = Booking.objects.filter(user=self.requet.user)
+        return booking_list
 
 class BookingView(FormView):
     form_class = AvailabilityForm
