@@ -22,6 +22,11 @@
                         <div class="category">
                             <h2>Użytkownik: {{booking.user}}</h2>
                         </div>
+                        <div>
+                        {% if car.image %}
+                           <img src="{{ car.image.url}}" alt="cant load media">
+                        {% endif %}
+                        </div>
                         <div class="from">
                             <h3>Od: {{booking.check_in}}</h3>
                         </div>

@@ -35,6 +35,7 @@ class CarDetail(models.Model):
 class Car(models.Model):
     main = models.ForeignKey(CarMain, on_delete=models.CASCADE)
     detail = models.OneToOneField(CarDetail, on_delete=models.PROTECT)
+    image = models.ImageField(blank=True, null=True)
 
     def delete(self):
         super(Car, self).delete()

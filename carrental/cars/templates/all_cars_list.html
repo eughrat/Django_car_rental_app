@@ -15,16 +15,19 @@
     </tr>
 {% for car in car_list %}
     <tr>
-                <td>{{ car.main.marka }}</td>
-                <td>{{ car.main.model }}</td>
-                <td>{{ car.detail.get_color_display }}</td>
-                <td>{{ car.detail.seats }}</td>
-                <td>{{ car.detail.get_fuel_display }}</td>
-                <td>{{ car.detail.power }}</td>
-                <td>{{ car.detail.production_date }}</td>
-                <td>${{ car.detail.price }}</td>
-                <td><a href="{% url 'cars:detail' car.id %}"> Sprawdź </a></td>
-                <td>Komentarzy: {{ car.comment.count }} </td>
+        {% if car.image %}
+            <td><img src="{{ car.image.url}}" alt=""></td>
+        {% endif %}
+        <td>{{ car.main.marka }}</td>
+        <td>{{ car.main.model }}</td>
+        <td>{{ car.detail.get_color_display }}</td>
+        <td>{{ car.detail.seats }}</td>
+        <td>{{ car.detail.get_fuel_display }}</td>
+        <td>{{ car.detail.power }}</td>
+        <td>{{ car.detail.production_date }}</td>
+        <td>${{ car.detail.price }}</td>
+        <td><a href="{% url 'cars:detail' car.id %}"> Sprawdź </a></td>
+        <td>Komentarzy: {{ car.comment.count }} </td>
 
     </tr>
 

@@ -64,6 +64,7 @@ def car_list_view(request):
             if production_date_end:
                 cars = cars.filter(detail__production_date__lte=production_date_end)
 
+
         context['cars'] = cars
         print(cars)
         context["car_detail_form"] = car_detail_form
