@@ -17,7 +17,7 @@ from django.contrib import admin
 
 
 from django.urls import path
-from .views import (car_list_view, car_view, BookingView, BookingListView, add_comment_to_car, AllCarsListView)
+from .views import (car_list_view, car_view, BookingView, BookingListView, add_comment_to_car, AllCarsListView, CancelBookingView)
 
 app_name = 'cars'
 
@@ -28,6 +28,7 @@ urlpatterns = [
     path('all_cars_list', AllCarsListView.as_view(), name = "all_cars_list"),
     path('car_list', car_list_view, name = "list"),
     path('<int:pk>/d+/comment/', add_comment_to_car, name='add_comment_to_car'),
+    path('booking/cancel/<int:pk>',CancelBookingView.as_view(),name="CancelBookingView"),
 ]
 
 

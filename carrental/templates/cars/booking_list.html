@@ -36,6 +36,9 @@
                         <div class="beds">
                             <h3>Model: {{booking.car}}</h3>
                         </div>
+                        <div class="cancel"><a href="{{booking.get_cancel_booking_url}}" ><i
+                            class="far fa-2x fa-times-circle">Zrezygnuj</i></a>
+                        </div>
                     </div>
                 {%endif%}
             {% endfor %}

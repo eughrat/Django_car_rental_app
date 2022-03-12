@@ -1,7 +1,7 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -53,9 +53,8 @@ class Booking(models.Model):
     def __str__(self):
         return f"{self.user} has booked {self.car} from {self.check_in} to {self.check_out}"
 
-    def approve_comments(self):
-        return self.comments.filter(approved_comment=True)
-
+    def get_cancel_booking_url(self):
+        return reverse_lazy('cars:CancelBookingView',args=[self.pk])
 
 class Comment(models.Model):
     car = models.ForeignKey('cars.Car', related_name='comment', on_delete=models.CASCADE)

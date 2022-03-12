@@ -1,10 +1,10 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
-from django.views.generic import ListView, FormView
+from django.views.generic import ListView, FormView, DeleteView
 from .models import Car, Booking
-from .forms import AvailabilityForm, CarForm, CarDetailForm, CarMainForm, CommentForm
+from .forms import AvailabilityForm, CarDetailForm, CarMainForm, CommentForm
 from .booking_functions.availability import check_availability
-
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 
 def car_list_view(request):
     context = {}
@@ -92,7 +92,7 @@ class BookingListView(ListView):
     model = Booking
     template_name = "booking_list.html"
     def get_query_set(self,*args,**kwargs):
-        booking_list = Booking.objects.filter(user=self.requet.user)
+        booking_list = Booking.objects.filter(user=self.request.user)
         return booking_list
 
 class BookingView(FormView):
@@ -116,6 +116,11 @@ class BookingView(FormView):
                 return HttpResponse(booking)
             else:
                 return HttpResponse('This car is already booked.')
+
+class CancelBookingView(DeleteView):
+    model = Booking
+    template_name = 'booking_cancel_view.html'
+    success_url = reverse_lazy('cars:booking_list')
 
 @login_required
 def add_comment_to_car(request, pk):
