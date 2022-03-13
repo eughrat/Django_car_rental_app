@@ -1,36 +1,28 @@
 {% extends "car_base.html" %}
 
 {% block car_content %}
-<a href="{% url 'cars:list' %}"> Wyszukiwanie zaawansowane </a>
-<table>
-    <tr>
-        <th>Marka</th>
-        <th>Model</th>
-        <th>Color</th>
-        <th>Seats</th>
-        <th>Fuel</th>
-        <th>Power</th>
-        <th>Production Date</th>
-        <th>Price</th>
-    </tr>
-{% for car in car_list %}
-    <tr>
-        {% if car.image %}
-            <td><img src="{{ car.image.url}}" alt=""></td>
-        {% endif %}
-        <td>{{ car.main.marka }}</td>
-        <td>{{ car.main.model }}</td>
-        <td>{{ car.detail.get_color_display }}</td>
-        <td>{{ car.detail.seats }}</td>
-        <td>{{ car.detail.get_fuel_display }}</td>
-        <td>{{ car.detail.power }}</td>
-        <td>{{ car.detail.production_date }}</td>
-        <td>${{ car.detail.price }}</td>
-        <td><a href="{% url 'cars:detail' car.id %}"> Sprawdź </a></td>
-        <td>Komentarzy: {{ car.comment.count }} </td>
 
-    </tr>
+<h1>Nasza oferta samochódów</h1>
+<h2><a href="{% url 'cars:list' %}"> Wyszukiwanie zaawansowane </a></h2>
 
-{% endfor %}
-</table>
+<div class="container">
+    <div class="content">
+        {% for car in car_list %}
+            <div class="car">
+                <a class href="{% url 'cars:detail' car.id %}">
+                    {% if car.image %}
+                        <img src="{{ car.image.url}}">
+                    {% endif %}
+                        <h2>{{car.main.marka}} {{ car.main.model }}</h2>
+                        <p>Kolor: {{ car.detail.get_color_display }}</p>
+                        <p>Ilość miejsc: {{ car.detail.seats }}</p>
+                        <p>Paliwo: {{ car.detail.get_fuel_display }}</p>
+                        <p>Moc silnika:{{ car.detail.power }}</p>
+                        <p>Rocznik: {{ car.detail.production_date }}</p>
+                        <p>Cena: {{ car.detail.price }} zł/24h</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock car_content %}

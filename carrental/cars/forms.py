@@ -28,20 +28,7 @@ class CarDetailForm(ModelForm):
     power_max = forms.IntegerField(min_value=0)
     price_min = forms.DecimalField(max_digits=9, decimal_places=2, validators=[MinValueValidator(0.00)])
     price_max = forms.DecimalField(max_digits=9, decimal_places=2, validators=[MinValueValidator(0.00)])
-    check_in =  forms.DateField(widget=DateInput(
-                format=('%d/%m/%Y'),
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Select a date',
-                    'type': 'date',}
-            ))
-    check_out =  forms.DateField(widget=DateInput(
-                format=('%d/%m/%Y'),
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Select a date',
-                    'type': 'date',}
-            ))
+
     class Meta:
         model = CarDetail
         exclude = ('car', 'power', 'production_date', 'price')
@@ -58,9 +45,6 @@ class CarDetailForm(ModelForm):
         self.fields['power_max'].required = False
         self.fields['price_min'].required = False
         self.fields['price_max'].required = False
-        self.fields['check_in'].required = False
-        self.fields['check_out'].required = False
-
 
 class CarMainForm(ModelForm):
     class Meta:

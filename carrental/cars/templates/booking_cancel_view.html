@@ -1,30 +1,25 @@
-{% load static %}
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room Detail</title>
-    <script src="https://kit.fontawesome.com/692189991f.js" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="{% static 'hotel/css/room_detail_view.css' %}">
-
-</head>
-
+{% block content %}
 <body>
     <div class="content">
-
         <form id="booking-form" action="" method="POST">
-
             {% csrf_token %}
-            <h2>Na pewno chcesz zrezygnować z rezerwacji?</h2>
-            <h3> {{booking}}</h3>
-            <!-- Input Div -->
+            <h3>Na pewno chcesz zrezygnować z rezerwacji?</h3>
+            <div class="beds">
+                <h4>Model: {{booking.car}}</h4>
+            </div>
+            <div class="from">
+                <h4>Od: {{booking.check_in}}</h4>
+            </div>
+            <div class="to">
+                <h4>Do: {{booking.check_out}}</h4>
+            </div>
             <div class="input-div">
-                <button type="'submit">Cancel the booking</button>
+                <button type="'submit">Rezygnuje</button>
             </div>
         </form>
     </div>
 </body>
 
-</html>
+{% endblock content %}

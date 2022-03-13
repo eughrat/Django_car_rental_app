@@ -2,89 +2,80 @@
 {% load static %}
 {% block car_content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="{% static 'cars/css/car_detail.css' %}">
-
-</head>
 <body>
     <div class="content">
-
-            <div class="image" height="200px" width="200px">
-                {% if car.image %}
-                    <img src="{{ car.image.url}}" alt="cant load media">
-                {% endif %}
-            </div>
-
-            <div class="car-info">
-                <h1>{{car}}</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id optio rem saepe culpa architecto tempora
-                    numquam debitis reiciendis! Quaerat laudantium consequuntur doloribus quod placeat consectetur
-                    veniam,
-                    rerum repellendus magnam labore.
-                </p>
-            </div>
-            <div class="car">
-                <table>
-
-                    <tr>
-                        <th>Marka</th>
-                        <td>{{ car.main.marka }}</td>
-                    </tr>
-                    <tr>
-                        <th>Model</th>
-                        <td>{{ car.main.model }}</td>
-                    </tr>
-                    <tr>
-                        <th>Kolor</th>
-                        <td>{{ car.detail.get_color_display }}</td>
-                    </tr>
-                    <tr>
-                        <th>Ilość siedzeń</th>
-                        <td>{{ car.detail.seats }}</td>
-                    </tr>
-                    <tr>
-                        <th>Typ Paliwa</th>
-                        <td>{{ car.detail.get_fuel_display }}</td>
-                    </tr>
-                    <tr>
-                        <th>Moc silnika</th>
-                        <td>{{ car.detail.power }}</td>
-                    </tr>
-                    <tr>
-                        <th>Data produkcji</th>
-                        <td>{{ car.detail.production_date }}</td>
-                    </tr>
-                    <tr>
-                        <th>Cena</th>
-                        <td>${{ car.detail.price }}</td>
-                    </tr>
-
-                </table>
-            </div>
-
-            {% if user.is_authenticated %}
-            <div>
-                <a class="btn btn-primary btn-comment" href="{% url 'cars:booking' car.id %}">Zamów samochód</a>
-            </div>
-            <div>
-            <a class="btn btn-primary btn-comment" href="{% url 'cars:add_comment_to_car' pk=car.pk %}">Dodaj komentarz</a>
-            </div>s
+        <div class="image" height="200px" width="200px">
+            {% if car.image %}
+                <img src="{{ car.image.url}}" alt="cant load media">
             {% endif %}
+        </div>
+        <div class="car-info">
+            <h1>{{car}}</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id optio rem saepe culpa architecto tempora
+                numquam debitis reiciendis! Quaerat laudantium consequuntur doloribus quod placeat consectetur
+                veniam,
+                rerum repellendus magnam labore.
+            </p>
+        </div>
+        <div class="car">
+            <table>
+                <tr>
+                    <th>Marka</th>
+                    <td>{{ car.main.marka }}</td>
+                </tr>
+                <tr>
+                    <th>Model</th>
+                    <td>{{ car.main.model }}</td>
+                </tr>
+                <tr>
+                    <th>Kolor</th>
+                    <td>{{ car.detail.get_color_display }}</td>
+                </tr>
+                <tr>
+                    <th>Ilość siedzeń</th>
+                    <td>{{ car.detail.seats }}</td>
+                </tr>
+                <tr>
+                    <th>Typ Paliwa</th>
+                    <td>{{ car.detail.get_fuel_display }}</td>
+                </tr>
+                <tr>
+                    <th>Moc silnika</th>
+                    <td>{{ car.detail.power }}</td>
+                </tr>
+                <tr>
+                    <th>Data produkcji</th>
+                    <td>{{ car.detail.production_date }}</td>
+                </tr>
+                <tr>
+                    <th>Cena</th>
+                    <td>${{ car.detail.price }}</td>
+                </tr>
 
+            </table>
+        </div>
+        {% if user.is_authenticated %}
+        <div>
+            <a class="btn btn-primary btn-comment" href="{% url 'cars:booking' car.id %}">Zamów samochód</a>
+        </div>
+        <div>
+        <a class="btn btn-primary btn-comment" href="{% url 'cars:add_comment_to_car' pk=car.pk %}">Dodaj komentarz</a>
+        </div>
+        {% endif %}
         <div class="container">
+            <h3>Komentarze:</h3>
             {% for comment in car.comment.all %}
             <br>
             {{ comment.created_date }}
             <p>{{comment.text}}</p>
-            <p>Posted by:{{comment.author}}</p>
+            <p>Utworzono: {{ comment.create_date|date:'d-m-y' }}</p>
+            <p>Autor:{{comment.author}}</p>
             {% empty %}
                 <p>No Comments!</p>
             {% endfor %}
         </div>
     </div>
 </body>
+
 {% endblock car_content %}
 

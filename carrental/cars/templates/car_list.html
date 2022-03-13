@@ -1,41 +1,40 @@
 {% extends "car_base.html" %}
 {% load static %}
+{% load bootstrap3 %}
 {% block car_content %}
-<form method="post">
-    {% csrf_token %}
-    {{ car_detail_form }}
-    {{ car_main_form }}
-    <input type="submit" value="Search">
-</form>
-<table>
-    <tr>
-        <th>Zdjęcie</th>
-        <th>Marka</th>
-        <th>Model</th>
-        <th>Color</th>
-        <th>Seats</th>
-        <th>Fuel</th>
-        <th>Power</th>
-        <th>Production Date</th>
-        <th>Price</th>
-    </tr>
-{% for car in cars %}
-    <tr>
-        {% if car.image %}
-            <td><img src="{{ car.image.url}}" alt=""></td>
-        {% endif %}
-        <td>{{ car.main.marka }}</td>
-        <td>{{ car.main.model }}</td>
-        <td>{{ car.detail.get_color_display }}</td>
-        <td>{{ car.detail.seats }}</td>
-        <td>{{ car.detail.get_fuel_display }}</td>
-        <td>{{ car.detail.power }}</td>
-        <td>{{ car.detail.production_date }}</td>
-        <td>${{ car.detail.price }}</td>
-        <td><a href="{% url 'cars:detail' car.id %}"> Sprawdź </a></td>
 
-    </tr>
-
-{% endfor %}
-</table>
+<div class="container">
+    <div class="input-list">
+        <form method="post">
+            {% csrf_token %}
+                 <table>
+                    {{ car_main_form.as_table }}
+                    {{ car_detail_form.as_table }}
+                 </table>
+            </br>
+        <div class="search">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Szukaj">
+        </div>
+        </form>
+    </div>
+    <div class="content">
+        {% for car in cars %}
+            <div class="car">
+                <a class href="{% url 'cars:detail' car.id %}">
+                    {% if car.image %}
+                        <img src="{{ car.image.url}}">
+                    {% endif %}
+                        <h2>{{car.main.marka}} {{ car.main.model }}</h2>
+                        <p>Kolor: {{ car.detail.get_color_display }}</p>
+                        <p>Ilość miejsc: {{ car.detail.seats }}</p>
+                        <p>Paliwo: {{ car.detail.get_fuel_display }}</p>
+                        <p>Moc silnika:{{ car.detail.power }}</p>
+                        <p>Rocznik: {{ car.detail.production_date }}</p>
+                        <p>Cena: {{ car.detail.price }} zł/24h</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock car_content %}
