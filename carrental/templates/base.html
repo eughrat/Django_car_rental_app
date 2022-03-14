@@ -17,11 +17,10 @@
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'css/car_list.css' %}">
-
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
-    <link rel="stylesheet" href="{% static 'css/booking_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/car_list.css' %}">
+
 </head>
 
 <body>
@@ -31,26 +30,28 @@
         <a class="navbar-brand mynav" href="{% url 'home' %}">Piernicki Rent</a>
         <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
-                <li><a href="{% url 'cars:booking_list' %}">Moje zamówienia</a></li>
-                <li><a href="{% url 'cars:all_cars_list' %}">Oferta</a></li>
-                <li><a href="{% url 'about' %}">O nas</a></li>
-                <li><a href="{% url 'cars:list' %}">Zarezerwuj</a></li>
-                <li><a href="{% url 'accounts:logout' %}">Wyloguj</a></li>
+                <li><a href="{% url 'cars:booking_list' %}">Manage booking</a></li>
+                <li><a href="{% url 'cars:all_cars_list' %}">Our offer</a></li>
+                <li><a href="{% url 'about' %}">About us</a></li>
+                <li><a href="{% url 'cars:list' %}">Search</a></li>
+                <li><a href="{% url 'accounts:logout' %}">Log out</a></li>
             {% else %}
-                <li><a href="{% url 'cars:all_cars_list' %}">Oferta</a></li>
-                <li><a href="{% url 'about' %}">O nas</a></li>
-                <li><a href="{% url 'cars:list' %}">Wyszukaj</a></li>
-                <li><a href="{% url 'accounts:login' %}">Zaloguj</a></li>
-                <li><a href="{% url 'accounts:signup' %}">Rejestracja</a></li>
+                <li><a href="{% url 'cars:all_cars_list' %}">Our Offer</a></li>
+                <li><a href="{% url 'about' %}">About us</a></li>
+                <li><a href="{% url 'cars:list' %}">Search</a></li>
+                <li><a href="{% url 'accounts:login' %}">Log in</a></li>
+                <li><a href="{% url 'accounts:signup' %}">Sign in</a></li>
             {% endif %}
         </ul>
     </div>
 </nav>
 
-<div class="container_content">
+<div class="content container">
+
     {% block content %}
 
     {% endblock %}
+
 </div>
 
 </body>

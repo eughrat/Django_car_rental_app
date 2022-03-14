@@ -7,7 +7,7 @@ User = get_user_model()
 
 
 class CarMain(models.Model):
-    marka = models.CharField(max_length=16)
+    brand = models.CharField(max_length=16)
     model = models.CharField(max_length=32)
 
 class CarDetail(models.Model):
@@ -42,7 +42,7 @@ class Car(models.Model):
         self.detail.delete()
 
     def __str__(self):
-        return f"{self.main.marka} {self.main.model}"
+        return f"{self.main.brand} {self.main.model}"
 
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

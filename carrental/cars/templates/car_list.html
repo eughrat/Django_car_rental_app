@@ -3,38 +3,36 @@
 {% load bootstrap3 %}
 {% block car_content %}
 
-<div class="container">
-    <div class="input-list">
-        <form method="post">
+<div class="sidebar">
+    <div class class="login-page">
+        <form method="post" class="post-form">
+            <button type="submit" class="save btn btn-default">Search</button>
+            </br></br>
             {% csrf_token %}
-                 <table>
-                    {{ car_main_form.as_table }}
-                    {{ car_detail_form.as_table }}
-                 </table>
-            </br>
-        <div class="search">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Szukaj">
-        </div>
+                <table>
+                    {% bootstrap_form car_main_form %}
+                    {% bootstrap_form car_detail_form %}
+                </table>
         </form>
     </div>
-    <div class="content">
-        {% for car in cars %}
-            <div class="car">
-                <a class href="{% url 'cars:detail' car.id %}">
-                    {% if car.image %}
-                        <img src="{{ car.image.url}}">
-                    {% endif %}
-                        <h2>{{car.main.marka}} {{ car.main.model }}</h2>
-                        <p>Kolor: {{ car.detail.get_color_display }}</p>
-                        <p>Ilość miejsc: {{ car.detail.seats }}</p>
-                        <p>Paliwo: {{ car.detail.get_fuel_display }}</p>
-                        <p>Moc silnika:{{ car.detail.power }}</p>
-                        <p>Rocznik: {{ car.detail.production_date }}</p>
-                        <p>Cena: {{ car.detail.price }} zł/24h</p>
-                </a>
-            </div>
-        {% endfor %}
-    </div>
 </div>
+<div class="list-content">
+    {% for car in cars %}
+        <div class="car">
+            <a class href="{% url 'cars:detail' car.id %}">
+                {% if car.image %}
+                    <img src="{{ car.image.url}}">
+                {% endif %}
+                    <h2>{{car.main.brand}} {{ car.main.model }}</h2>
+                    <p>Color: {{ car.detail.get_color_display }}</p>
+                    <p>No of seats: {{ car.detail.seats }}</p>
+                    <p>Fuel type: {{ car.detail.get_fuel_display }}</p>
+                    <p>Engine power:{{ car.detail.power }}</p>
+                    <p>Prod. date: {{ car.detail.production_date }}</p>
+                    <p>Price: {{ car.detail.price }} /24h</p>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+
 {% endblock car_content %}

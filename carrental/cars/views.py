@@ -20,9 +20,9 @@ def car_list_view(request):
         car_detail_form = CarDetailForm(request.POST, prefix='detail')
         car_main_form = CarMainForm(request.POST, prefix='main')
         if car_detail_form.is_valid() and car_main_form.is_valid():
-            marka = car_main_form.cleaned_data['marka']
-            if marka:
-                cars = cars.filter(main__marka=marka)
+            brand = car_main_form.cleaned_data['brand']
+            if brand:
+                cars = cars.filter(main__brand=brand)
 
             model = car_main_form.cleaned_data['model']
             if model:

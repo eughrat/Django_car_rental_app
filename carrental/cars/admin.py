@@ -8,7 +8,7 @@ class CarAdmin(admin.ModelAdmin):
     list_display = ['get_main_marka', 'get_main_model', 'get_detail_production_date']
 
     def get_main_marka(self, obj):
-        return obj.main.marka
+        return obj.main.brand
 
     def get_main_model(self, obj):
         return obj.main.model

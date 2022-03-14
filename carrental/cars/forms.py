@@ -54,7 +54,7 @@ class CarMainForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(CarMainForm, self).__init__(*args, **kwargs)
         self.fields['model'].required = False
-        self.fields['marka'].required = False
+        self.fields['brand'].required = False
 
 class AvailabilityForm(forms.Form):
     check_in = forms.DateTimeField(required=True, input_formats=["%Y-%m-%dT%H:%M", ])

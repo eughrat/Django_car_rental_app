@@ -2,15 +2,15 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="header">
-        <div class="headings">
-            <h1>Twoje zamówienia, {{user}}</h1>
+<div>
+    <div>
+        <div>
+            <h1>Your bookings, {{user}}</h1>
         </div>
     </div>
     </br>
     </br>
-    <div class="content">
+    <div>
         {% for booking in booking_list %}
             {%if booking.user == user%}
                 <div class="car">
@@ -20,20 +20,18 @@
                     {% endif %}
                     </div>
                     <div class="beds">
-                        <h4>Model: {{booking.car}}</h4>
+                        <h4>{{booking.car}}</h4>
                     </div>
                     <div class="from">
-                        <h4>Od: {{booking.check_in}}</h4>
+                        <h4>Pick-up: {{booking.check_in}}</h4>
                     </div>
                     <div class="to">
-                        <h4>Do: {{booking.check_out}}</h4>
+                        <h4>Drop-off: {{booking.check_out}}</h4>
                     </div>
 
                     <h4><a href="{{booking.get_cancel_booking_url}}" ><i
-                        class="far fa-2x fa-times-circle">Zrezygnuj</i></a></h4>
+                        class="far fa-2x fa-times-circle">Resign</i></a></h4>
                 </div>
-
-
             {%endif%}
         {% endfor %}
     </div>
