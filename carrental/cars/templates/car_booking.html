@@ -1,27 +1,17 @@
 {% extends "car_base.html" %}
-
+{% load bootstrap3 %}
 {% block car_content %}
 
-<div><a href="{% url 'home' %}">BACK</a></div>
+<h1>Confirm your booking</h1>
 
-<form id="booking-form" action="" method="POST" class="post-form">
+<div class="login-page">
+    <form id="booking-form" action="" method="POST" class="post-form">
 
-    {% csrf_token %}
-
-    <div class="input-div">
-        <label for="id_check_in">Check In : </label>
-        <input type="datetime-local" id="id_check_in" name="check_in">
-    </div>
-
-    <div class="input-div">
-        <label for="id_check_out">Check Out : </label>
-        <input type="datetime-local" id="id_check_out" name="check_out">
-    </div>
-
-    <div class="input-div">
-        <button type="submit">Book the Car</button>
-    </div>
-</form>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+         <a href="{% url 'cars:booking_list'%}"><button type="submit" class="save btn btn-default">Book</button></a>
+    </form>
+</div>
 
 {% endblock car_content %}
 

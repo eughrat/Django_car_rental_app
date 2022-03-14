@@ -1,25 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<body>
-    <div>
+
+<div class="list-content">
+    <h1>Are you sure to resign ?</h1>
+    <div class="car-detail" >
         <form id="booking-form" action="" method="POST">
             {% csrf_token %}
-            <h3>Are you sure to resign ?</h3>
-            <div class="beds">
-                <h4>Brand: {{booking.car}}</h4>
-            </div>
-            <div class="from">
-                <h4>Pick-up: {{booking.check_in}}</h4>
-            </div>
-            <div class="to">
-                <h4>Drop-off: {{booking.check_out}}</h4>
-            </div>
-            <div class="input-div">
-                <button type="'submit">Resign</button>
-            </div>
+                <h2>Brand: {{booking.car}}</h2>
+                <p>Pick-up: {{booking.check_in}}</p>
+                <p>Drop-off: {{booking.check_out}}</p>
+                <button class="btn btn-primary btn-comment" type="submit">Resign</button>
         </form>
     </div>
-</body>
+</div>
 
 {% endblock content %}

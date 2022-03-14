@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
+from django.shortcuts import render, HttpResponse, get_object_or_404, redirect, HttpResponseRedirect
 from django.views.generic import ListView, FormView, DeleteView
 from .models import Car, Booking
 from .forms import AvailabilityForm, CarDetailForm, CarMainForm, CommentForm
@@ -109,13 +109,12 @@ class BookingView(FormView):
                     user = self.request.user,
                     car = car,
                     check_in = data['check_in'],
-
                     check_out = data['check_out'],
                 )
                 booking.save()
-                return HttpResponse(booking)
+                return HttpResponse("<h2><a href='http://127.0.0.1:8000/'>Your booking has been confirmed, click to return to home page</a></h2>")
             else:
-                return HttpResponse('This car is already booked.')
+                return HttpResponse("<h2><a href='http://127.0.0.1:8000/'>This car is already booked, click to return to home page</a></h2>")
 
 class CancelBookingView(DeleteView):
     model = Booking

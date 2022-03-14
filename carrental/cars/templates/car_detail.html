@@ -2,79 +2,52 @@
 {% load static %}
 {% block car_content %}
 
-<div class="detail-content">
-    <div class="square">
-        <div>
-            <h1>{{car}}</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id optio rem saepe culpa architecto tempora
-                numquam debitis reiciendis! Quaerat laudantium consequuntur doloribus quod placeat consectetur
-                veniam,
-                rerum repellendus magnam labore.
-            </p>
-        </div>
-        <div class="">
-            <table>
-                <tr>
-                    <th>Brand</th>
-                    <td>{{ car.main.brand }}</td>
-                </tr>
-                <tr>
-                    <th>Model</th>
-                    <td>{{ car.main.model }}</td>
-                </tr>
-                <tr>
-                    <th>Color</th>
-                    <td>{{ car.detail.get_color_display }}</td>
-                </tr>
-                <tr>
-                    <th>No. of seats</th>
-                    <td>{{ car.detail.seats }}</td>
-                </tr>
-                <tr>
-                    <th>Fuel type</th>
-                    <td>{{ car.detail.get_fuel_display }}</td>
-                </tr>
-                <tr>
-                    <th>Engine power</th>
-                    <td>{{ car.detail.power }}</td>
-                </tr>
-                <tr>
-                    <th>Prod. date</th>
-                    <td>{{ car.detail.production_date }}</td>
-                </tr>
-                <tr>
-                    <th>Price</th>
-                    <td>{{ car.detail.price }}</td>
-                </tr>
 
-            </table>
-    </div>
-    <div class="square">
-        {% if car.image %}
-            <img src="{{ car.image.url}}" alt="cant load media">
+<div class="square">
+    <div class="car-detail">
+        <h2>{{car}}</h2>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id optio rem saepe culpa architecto tempora
+            numquam debitis reiciendis! Quaerat laudantium consequuntur doloribus quod placeat consectetur
+            veniam,
+            rerum repellendus magnam labore.
+        </p>
+        <p>Color: {{ car.detail.get_color_display }}</p>
+        <p>No of seats: {{ car.detail.seats }}</p>
+        <p>Fuel type: {{ car.detail.get_fuel_display }}</p>
+        <p>Engine power:{{ car.detail.power }}</p>
+        <p>Prod. date: {{ car.detail.production_date }}</p>
+        <p>Price: {{ car.detail.price }} /24h</p>
+        {% if user.is_authenticated %}
+            <a class="btn btn-primary btn-comment" href="{% url 'cars:booking' car.id %}">Book a car</a>
         {% endif %}
-    </div>
-    {% if user.is_authenticated %}
-    <div class="button">
-        <a class="btn btn-primary btn-comment" href="{% url 'cars:booking' car.id %}">Book a car</a>
-    </div>
-    <div class="button">
-    <a class="btn btn-primary btn-comment" href="{% url 'cars:add_comment_to_car' pk=car.pk %}">Add comment</a>
-    </div>
-    {% endif %}
-    <div class="content">
-        <h3>Comments:</h3>
-        {% for comment in car.comment.all %}
-        <br>
-        {{ comment.created_date }}
-        <p>{{comment.text}}</p>
-        <p>Created at: {{ comment.create_date|date:'d-m-y' }}</p>
-        <p>Author:{{comment.author}}</p>
-        {% empty %}
-            <p>No Comments!</p>
-        {% endfor %}
+            <a class="btn btn-primary btn-comment" href="{% url 'cars:add_comment_to_car' pk=car.pk %}">Add comment</a>
     </div>
 </div>
+
+<div class="square">
+    {% if car.image %}
+        <img src="{{ car.image.url}}" alt="cant load media">
+    {% endif %}
+</div>
+
+<div style="clear: both;"></div>
+
+<div class="line"></div>
+
+<div class="comments">
+    <h3>Comments:</h3>
+    {% for comment in car.comment.all %}
+    <br>
+    {{ comment.created_date }}
+    <p>{{comment.text}}</p>
+    <p>Created at: {{ comment.create_date|date:'d-m-y' }}</p>
+    <p>Author:{{comment.author}}</p>
+    {% empty %}
+    <p>No Comments!</p>
+    {% endfor %}
+</div>
+
 
 {% endblock car_content %}
 

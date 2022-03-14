@@ -10,6 +10,9 @@ class CarMain(models.Model):
     brand = models.CharField(max_length=16)
     model = models.CharField(max_length=32)
 
+    def __str__(self):
+        return f"{self.brand} {self.model}"
+
 class CarDetail(models.Model):
     CAR_COLORS = [
         ("RED", "Red"),
@@ -31,6 +34,9 @@ class CarDetail(models.Model):
     fuel = models.CharField(max_length=3, choices=CAR_FUELS)
     power = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=9, decimal_places=2, validators=[MinValueValidator(0.00)])
+
+    def __str__(self):
+        return f"prod_date:{self.production_date},color : {self.color},seats : {self.seats},fuel : {self.fuel},power : {self.power},price : {self.price}"
 
 class Car(models.Model):
     main = models.ForeignKey(CarMain, on_delete=models.CASCADE)

@@ -2,35 +2,23 @@
 
 {% block content %}
 
-<div>
-    <div>
-        <div>
-            <h1>Your bookings, {{user}}</h1>
-        </div>
-    </div>
-    </br>
-    </br>
-    <div>
+
+<h1>Your bookings, {{user}}</h1>
+
+<div class="list-content">
         {% for booking in booking_list %}
             {%if booking.user == user%}
-                <div class="car">
-                    <div>
-                    {% if car.image %}
-                       <img src="{{ car.image.url}}" alt="cant load media">
-                    {% endif %}
-                    </div>
-                    <div class="beds">
-                        <h4>{{booking.car}}</h4>
-                    </div>
-                    <div class="from">
-                        <h4>Pick-up: {{booking.check_in}}</h4>
-                    </div>
-                    <div class="to">
-                        <h4>Drop-off: {{booking.check_out}}</h4>
-                    </div>
-
-                    <h4><a href="{{booking.get_cancel_booking_url}}" ><i
-                        class="far fa-2x fa-times-circle">Resign</i></a></h4>
+                <div class="car-booking">
+                    <h2>{{booking.car}}</h2>
+                    <h4>Pick-up: {{booking.check_in}}</h4>
+                    <h4>Drop-off: {{booking.check_out}}</h4>
+                    <h4>
+                        <a href="{{booking.get_cancel_booking_url}}">
+                            <i class="far fa-2x fa-times-circle">
+                                Resign
+                            </i>
+                        </a>
+                    </h4>
                 </div>
             {%endif%}
         {% endfor %}

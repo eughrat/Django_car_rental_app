@@ -57,8 +57,20 @@ class CarMainForm(ModelForm):
         self.fields['brand'].required = False
 
 class AvailabilityForm(forms.Form):
-    check_in = forms.DateTimeField(required=True, input_formats=["%Y-%m-%dT%H:%M", ])
-    check_out = forms.DateTimeField(required=True, input_formats=["%Y-%m-%dT%H:%M", ])
+    check_in = forms.DateTimeField(widget=DateInput(
+                                    format=('%d/%m/%Y'),
+                                    attrs = {
+                                        'class': 'form-control',
+                                        'placeholder': 'Select a date',
+                                        'type': 'date', }
+                                    ))
+    check_out = forms.DateTimeField(widget=DateInput(
+                                    format=('%d/%m/%Y'),
+                                    attrs = {
+                                        'class': 'form-control',
+                                        'placeholder': 'Select a date',
+                                        'type': 'date', }
+                                    ))
 
 class CommentForm(forms.ModelForm):
 
