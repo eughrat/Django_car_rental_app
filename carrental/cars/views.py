@@ -112,9 +112,9 @@ class BookingView(FormView):
                     check_out = data['check_out'],
                 )
                 booking.save()
-                return HttpResponse("<h2><a href='http://127.0.0.1:8000/'>Your booking has been confirmed, click to return to home page</a></h2>")
+                return HttpResponse("<h2><a href='http://eughrat.pythonanywhere.com/'>Your booking has been confirmed, click to return to home page</a></h2>")
             else:
-                return HttpResponse("<h2><a href='http://127.0.0.1:8000/'>This car is already booked, click to return to home page</a></h2>")
+                return HttpResponse("<h2><a href='http://eughrat.pythonanywhere.com/'>This car is already booked, click to return to home page</a></h2>")
 
 class CancelBookingView(DeleteView):
     model = Booking
